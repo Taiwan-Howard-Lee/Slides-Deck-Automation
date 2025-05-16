@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base target="_top">
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://use.typekit.net/hnl7dqk.css" rel="stylesheet"> <!-- Proxima Nova from Adobe Fonts -->
+    <script src="https://kit.fontawesome.com/ec27db2507.js" crossorigin="anonymous"></script>
+    <style>
+      /* CSS Variables */
+      :root {
+        --teal-color: #39908b; /* Primary teal color */
+        --white: #ffffff;       /* White color */
+        --primary-font: 'Teko', sans-serif;  /* Primary font (headings) */
+        --secondary-font: 'proxima-nova', 'Proxima Nova', sans-serif;  /* Secondary font (body) */
+      }
+
+      /* Reset & Global Styles */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Global font and background */
+      body {
+        font-family: var(--secondary-font);
+        /* --- ADDED SUBTLE GRADIENT BACKGROUND --- */
+        background: linear-gradient(to bottom right, #e0eafc, #cfdef3); /* A gentle blue gradient */
+        /* --- END BACKGROUND CHANGE --- */
+        padding: 20px;
+        color: var(--teal-color);
+        line-height: 1.6;
+      }
+
+      /* Container styling */
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: var(--white);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        animation: fadeIn 1s ease-out;
+      }
+
+      /* Headings: Use Teko font */
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--primary-font);
+        text-align: center;
+        margin-bottom: 20px;
+        color: var(--teal-color);
+      }
+      h1 i {
+        margin-right: 10px;
+      }
+
+      /* Introductory text */
+      p.intro {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.2em;
+      }
+
+      /* Company logo styling */
+      .company-logo {
+        display: block;
+        max-width: 150px;
+        margin: 0 auto 20px auto;
+      }
+
+      /* Template gallery button */
+      .template-gallery {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .template-gallery a {
+        display: inline-block;
+        padding: 12px 24px;
+        font-size: 1.2em;
+        font-weight: 600;
+        color: var(--teal-color);
+        background: var(--white);
+        border: 2px solid var(--teal-color);
+        border-radius: 6px;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      .template-gallery a:hover {
+        background-color: var(--teal-color);
+        color: var(--white);
+      }
+
+      /* Form styling */
+      form {
+        margin: 20px 0;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 1.1em;
+        color: var(--teal-color);
+      }
+      input[type="text"],
+      select,
+      textarea {
+        width: 100%;
+        padding: 15px;
+        font-size: 1.1em;
+        font-family: var(--secondary-font);
+        margin-bottom: 15px;
+        background: var(--white);
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        color: var(--teal-color);
+      }
+      input[type="text"]::placeholder,
+      textarea::placeholder {
+        color: #999;
+      }
+      input[type="text"]:focus,
+      select:focus,
+      textarea:focus {
+        border-color: var(--teal-color);
+        box-shadow: 0 0 8px rgba(57,144,139,0.3);
+        outline: none;
+      }
+
+      /* Submit button styling */
+      button.submit-btn {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        font-size: 1.2em;
+        font-family: var(--primary-font);
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        background-color: var(--white);
+        color: var(--teal-color);
+        border: 2px solid var(--teal-color);
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+      }
+      button.submit-btn i {
+        margin-right: 8px;
+      }
+      button.submit-btn:hover {
+        background-color: var(--teal-color);
+        color: var(--white);
+        transform: scale(1.02);
+      }
+
+      /* Loading spinner styling */
+      .loading-spinner {
+        display: none;
+        text-align: center;
+        margin: 20px 0;
+      }
+      .spinner {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid var(--teal-color);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 2s linear infinite;
+        margin: 0 auto;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 600px) {
+        .container {
+          padding: 20px;
+        }
+        input[type="text"],
+        select,
+        textarea,
+        button.submit-btn {
+          padding: 12px;
+          font-size: 1em;
+        }
+        .template-gallery a {
+          padding: 10px 16px;
+          font-size: 1em;
+        }
+      }
+
+      /* Optional section styling */
+      .optional-section {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 10px;
+        margin: 10px 0;
+        background-color: #f9f9f9;
+      }
+
+      .optional-section h3 {
+        margin-top: 0;
+        color: #555;
+        font-size: 1em;
+        margin-bottom: 10px;
+      }
+
+      .help-text {
+        font-size: 0.8em;
+        color: #666;
+        margin-top: 0;
+      }
+
+      /* Field row and column layout */
+      .field-row {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 15px;
+      }
+
+      .field-column {
+        flex: 1;
+      }
+
+      .description-field-group {
+        position: relative;
+        padding: 10px;
+        border: 1px dashed #ddd;
+        border-radius: 4px;
+        margin-bottom: 15px;
+        background-color: #fff;
+      }
+
+      /* Remove field button */
+      .remove-field-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: none;
+        border: none;
+        color: #999;
+        cursor: pointer;
+        font-size: 1em;
+        padding: 5px;
+      }
+
+      .remove-field-btn:hover {
+        color: #ff6b6b;
+      }
+
+      /* Add field button */
+      .add-field-btn {
+        background-color: #f5f5f5;
+        border: 1px dashed #ccc;
+        color: #666;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+        font-family: var(--primary-font);
+        font-weight: 500;
+        width: 100%;
+        margin-top: 5px;
+        transition: all 0.3s ease;
+      }
+
+      .add-field-btn:hover {
+        background-color: #e9e9e9;
+        color: var(--teal-color);
+      }
+
+      .template-gallery-subtle {
+        display: block;
+        text-align: right;
+        margin-top: 8px;  /* spacing above the link */
+        margin-bottom: 4px; /* spacing below the link */
+        font-size: 0.85em;
+      }
+
+      .template-gallery-subtle a {
+        color: var(--teal-color) !important;
+        text-decoration: underline;
+      }
+
+      /* Fade-in animation */
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Modal styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+      }
+
+      .modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 25px;
+        border-radius: 10px;
+        width: 80%;
+        max-width: 600px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      }
+
+      .close-modal {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .template-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 15px 0;
+      }
+
+      .template-buttons button {
+        flex: 1 0 30%;
+        padding: 10px;
+        background-color: #f0f0f0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-family: var(--primary-font);
+        font-size: 1.1em;
+        font-weight: 500;
+      }
+
+      .template-buttons button:hover {
+        background-color: #e0e0e0;
+      }
+
+      .template-editor textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-family: var(--secondary-font);
+        font-size: 14px;
+      }
+
+      .modal-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .apply-btn {
+        background-color: var(--teal-color);
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: var(--primary-font);
+        font-size: 1.1em;
+        font-weight: 500;
+      }
+
+      .cancel-btn {
+        background-color: #f0f0f0;
+        border: 1px solid #ddd;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: var(--primary-font);
+        font-size: 1.1em;
+        font-weight: 500;
+      }
+
+      /* Prompt display in main form */
+      .prompt-container {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .prompt-display {
+        min-height: 60px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        margin-bottom: 5px;
+        font-style: italic;
+        color: #666;
+      }
+
+      .create-prompt-btn {
+        align-self: flex-end;
+        background-color: var(--teal-color);
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9em;
+        font-family: var(--primary-font);
+        font-weight: 500;
+        letter-spacing: 0.5px;
+      }
+
+      /* Error display styling */
+      .error-container {
+        margin: 20px 0;
+        border: 1px solid #f5c6cb;
+        border-radius: 5px;
+        background-color: #f8d7da;
+        color: #721c24;
+        overflow: hidden;
+        animation: fadeIn 0.3s ease-out;
+      }
+
+      .error-header {
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        background-color: #f1b0b7;
+      }
+
+      .error-header i {
+        margin-right: 10px;
+        font-size: 1.2em;
+      }
+
+      .error-header h3 {
+        margin: 0;
+        flex-grow: 1;
+        color: #721c24;
+        font-size: 1.3em;
+        font-family: var(--primary-font);
+        font-weight: 500;
+      }
+
+      .dismiss-error {
+        background: none;
+        border: none;
+        font-size: 1.5em;
+        cursor: pointer;
+        color: #721c24;
+      }
+
+      .error-body {
+        padding: 15px;
+      }
+
+      .error-message {
+        margin-top: 0;
+        font-weight: 500;
+        font-family: var(--secondary-font);
+      }
+
+      .error-suggestion {
+        margin-top: 10px;
+        font-style: italic;
+        font-family: var(--secondary-font);
+      }
+
+      .toggle-details {
+        background: none;
+        border: none;
+        color: #721c24;
+        text-decoration: underline;
+        cursor: pointer;
+        padding: 0;
+        margin-top: 10px;
+        font-size: 0.9em;
+      }
+
+      .error-details {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: #f1b0b7;
+        border-radius: 3px;
+        font-family: monospace;
+        white-space: pre-wrap;
+        font-size: 0.9em;
+        max-height: 200px;
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <img src="https://cdn.prod.website-files.com/63f3e085b054e9e3120238f1/63f3e0ba605c2a218c60f27e_image%201.svg" alt="Company Logo" class="company-logo">
+
+      <h1><i class="fa-solid fa-wand-magic"></i>Slide Deck Automation 2.0</h1>
+
+      <p class="intro">Welcome! Please select your template to get started.</p>
+
+      <div id="templateSection">
+        <label for="templateDropdown">Select Template File:</label>
+        <select id="templateDropdown" name="templateDropdown" onchange="onTemplateChange()">
+          <option value="">-- Loading Templates... --</option>
+        </select>
+      </div>
+
+      <div class="template-gallery-subtle">
+        <a id="galleryLink" href="https://drive.google.com/drive/u/0/folders/1eCjnDNHYDqskWYqPhJdlMTXiqio4TJkr" target="_blank">
+          View full template gallery
+        </a>
+      </div>
+
+
+      <input type="hidden" id="layout" name="layout" value="" />
+
+      <div id="universalFields">
+        <label for="airtableUrl">Airtable URL:</label>
+        <input type="text" id="airtableUrl" name="airtableUrl" placeholder="'[4.4] Ready for preso' must be inside as a clickbox field!!!" required />
+
+        <label for="systemInstruction"> Slides Deck Details:</label>
+        <textarea id="systemInstruction" name="systemInstruction" rows="4" placeholder='Enter the details for the purpose of this deck, for example, "Pepsi is looking for a healthy new soda..."' required></textarea>
+
+        <div class="optional-section">
+          <h3>Optional AI Processing (max 3 fields)</h3>
+          <p class="help-text">Leave fields empty to skip AI processing of descriptions.</p>
+
+          <div id="descriptionFieldsContainer">
+            <div class="description-field-group">
+              <div class="field-row">
+                <div class="field-column">
+                  <label for="descriptionField1">Description Field Name:</label>
+                  <input type="text" id="descriptionField1" name="descriptionField1" placeholder="Enter field name (e.g., 'Long description')" value="" />
+                </div>
+                <div class="field-column">
+                  <label for="aiPrompt1">AI Prompt:</label>
+                  <div class="prompt-container">
+                    <textarea id="aiPrompt1" name="aiPrompt1" rows="3" style="display: none;"></textarea>
+                    <div id="promptDisplay1" class="prompt-display">Click below to create prompt</div>
+                    <button type="button" class="create-prompt-btn" onclick="openPromptModal(1)">
+                      <i class="fas fa-magic"></i> Create Prompt
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            </div>
+
+          <button type="button" id="addFieldBtn" class="add-field-btn" onclick="addDescriptionField()">
+            <i class="fas fa-plus"></i> Add Another Field
+          </button>
+        </div>
+      </div>
+
+      <div id="finalDeckField">
+        <label for="finalDeckUrl">Final Deck URL:</label>
+        <input type="text" id="finalDeckUrl" name="finalDeckUrl" placeholder="This slide deck must provide edit access for anyone with the link!!!" required />
+      </div>
+
+      <input type="hidden" id="templateDeckUrl" name="templateDeckUrl" value="" />
+
+      <button type="button" class="submit-btn" onclick="submitForm()">
+        <i class="fas fa-paper-plane"></i> Submit
+      </button>
+
+      <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner"></div>
+        <p>Working on it...</p>
+      </div>
+
+      <!-- Error display container (initially hidden) -->
+      <div id="errorContainer" class="error-container" style="display: none;"></div>
+    </div>
+
+    <!-- Prompt Modal -->
+    <div id="promptModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal" onclick="closePromptModal()">&times;</span>
+        <h3>Create Your AI Prompt</h3>
+
+        <div class="template-buttons">
+          <button type="button" onclick="loadTemplate('refineDescription')">Refine Description</button>
+          <button type="button" onclick="loadTemplate('highlightBenefits')">Highlight Benefits</button>
+          <button type="button" onclick="loadTemplate('technicalDetails')">Technical Details</button>
+          <button type="button" onclick="loadTemplate('marketPosition')">Market Position</button>
+          <button type="button" onclick="loadTemplate('valueProposition')">Value Proposition</button>
+          <button type="button" onclick="loadTemplate('companyOverview')">Company Overview</button>
+        </div>
+
+        <div class="template-editor">
+          <textarea id="templateEditor" rows="8" placeholder="Select a template or write your own prompt"></textarea>
+        </div>
+
+        <div class="modal-buttons">
+          <button type="button" class="apply-btn" onclick="applyPrompt()">Apply</button>
+          <button type="button" class="cancel-btn" onclick="closePromptModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // This function extracts the folder ID from the gallery link URL.
+      function getFolderIdFromGallery() {
+        var galleryLink = document.getElementById('galleryLink').getAttribute('href');
+        // Match the folder ID between "/folders/" and the next "/" or end of string.
+        var match = galleryLink.match(/\/folders\/([^\/]+)/);
+        return match ? match[1] : "";
+      }
+
+      // Load template files from the specified Drive folder on page load.
+      function loadTemplateFiles() {
+        var folderId = getFolderIdFromGallery();
+        console.log("Extracted folder ID:", folderId);
+
+        google.script.run
+          .withSuccessHandler(function(files) {
+            var dropdown = document.getElementById('templateDropdown');
+            dropdown.innerHTML = "<option value=''>-- Select Template --</option>";
+            files.forEach(function(file) {
+              var option = document.createElement("option");
+              option.value = file.url;
+              option.text = file.name;
+              dropdown.appendChild(option);
+            });
+            console.log("Loaded files:", files);
+          })
+          .withFailureHandler(function(error) {
+            console.error("Error loading templates:", error);
+          })
+          .getTemplateFilesFromFolder(folderId);
+      }
+
+      // Call loadTemplateFiles() when the window loads.
+      window.onload = function() {
+        loadTemplateFiles();
+      }
+
+      // When a template file is selected, detect the layout from its name and populate hidden fields.
+      function onTemplateChange() {
+        var dropdown = document.getElementById('templateDropdown');
+        var selectedUrl = dropdown.value;
+        var selectedName = dropdown.options[dropdown.selectedIndex].text;
+        var layout = "";
+        // Detect 'single' or 'double' in the file name.
+        if (selectedName.toLowerCase().includes("single")) {
+          layout = "single";
+        } else if (selectedName.toLowerCase().includes("double")) {
+          layout = "double";
+        }
+        document.getElementById("layout").value = layout;
+        document.getElementById("templateDeckUrl").value = selectedUrl;
+      }
+
+      // Add a new description field (up to 3 total)
+      function addDescriptionField() {
+        var container = document.getElementById('descriptionFieldsContainer');
+        var fieldGroups = container.getElementsByClassName('description-field-group');
+
+        // Only allow up to 3 fields
+        if (fieldGroups.length >= 3) {
+          alert('Maximum of 3 description fields allowed');
+          return;
+        }
+
+        var newIndex = fieldGroups.length + 1;
+
+        // Create new field group
+        var newGroup = document.createElement('div');
+        newGroup.className = 'description-field-group';
+        newGroup.innerHTML = `
+          <button type="button" class="remove-field-btn" onclick="removeDescriptionField(this)">
+            <i class="fas fa-times"></i>
+          </button>
+          <div class="field-row">
+            <div class="field-column">
+              <label for="descriptionField${newIndex}">Description Field Name:</label>
+              <input type="text" id="descriptionField${newIndex}" name="descriptionField${newIndex}"
+                placeholder="Enter field name (e.g., 'Short description')" value="" />
+            </div>
+            <div class="field-column">
+              <label for="aiPrompt${newIndex}">AI Prompt:</label>
+              <div class="prompt-container">
+                <textarea id="aiPrompt${newIndex}" name="aiPrompt${newIndex}" rows="3" style="display: none;"></textarea>
+                <div id="promptDisplay${newIndex}" class="prompt-display">Click below to create prompt</div>
+                <button type="button" class="create-prompt-btn" onclick="openPromptModal(${newIndex})">
+                  <i class="fas fa-magic"></i> Create Prompt
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(newGroup);
+
+        // Hide the add button if we've reached the maximum
+        if (newIndex >= 3) {
+          document.getElementById('addFieldBtn').style.display = 'none';
+        }
+      }
+
+      // Remove a description field
+      function removeDescriptionField(button) {
+        var fieldGroup = button.parentNode;
+        fieldGroup.parentNode.removeChild(fieldGroup);
+
+        // Show the add button again
+        document.getElementById('addFieldBtn').style.display = 'block';
+
+        // Renumber the remaining fields
+        renumberDescriptionFields();
+      }
+
+      // Renumber the description fields after removal
+      function renumberDescriptionFields() {
+        var container = document.getElementById('descriptionFieldsContainer');
+        var fieldGroups = container.getElementsByClassName('description-field-group');
+
+        for (var i = 0; i < fieldGroups.length; i++) {
+          var index = i + 1;
+          var group = fieldGroups[i];
+
+          // Update field name input
+          var fieldNameInput = group.querySelector('input[id^="descriptionField"]');
+          fieldNameInput.id = 'descriptionField' + index;
+          fieldNameInput.name = 'descriptionField' + index;
+
+          // Update label for field name
+          var fieldNameLabel = group.querySelector('label[for^="descriptionField"]');
+          fieldNameLabel.setAttribute('for', 'descriptionField' + index);
+
+          // Update prompt textarea
+          var promptTextarea = group.querySelector('textarea[id^="aiPrompt"]');
+          promptTextarea.id = 'aiPrompt' + index;
+          promptTextarea.name = 'aiPrompt' + index;
+
+          // Update label for prompt
+          var promptLabel = group.querySelector('label[for^="aiPrompt"]');
+          promptLabel.setAttribute('for', 'aiPrompt' + index);
+
+          // Remove the remove button from the first field if it's the only one
+          if (fieldGroups.length === 1 && i === 0) {
+            var removeBtn = group.querySelector('.remove-field-btn');
+            if (removeBtn) {
+              removeBtn.parentNode.removeChild(removeBtn);
+            }
+          }
+        }
+      }
+
+      // When the form is submitted, gather all data and send it to the server.
+      function submitForm() {
+        // Show the loading spinner.
+        document.getElementById("loadingSpinner").style.display = "block";
+
+        var airtableUrl = document.getElementById('airtableUrl').value;
+        var systemInstruction = document.getElementById('systemInstruction').value;
+        var layout = document.getElementById('layout').value;
+        var templateDeckUrl = document.getElementById('templateDeckUrl').value;
+        var finalDeckUrl = document.getElementById('finalDeckUrl').value;
+
+        // Collect description fields and prompts
+        var descriptionFieldsData = [];
+        var container = document.getElementById('descriptionFieldsContainer');
+        var fieldGroups = container.getElementsByClassName('description-field-group');
+
+        for (var i = 0; i < fieldGroups.length; i++) {
+          var index = i + 1;
+          var fieldName = document.getElementById('descriptionField' + index).value;
+          var prompt = document.getElementById('aiPrompt' + index).value;
+
+          if (fieldName && prompt) {
+            descriptionFieldsData.push({
+              fieldName: fieldName,
+              prompt: prompt
+            });
+          }
+        }
+
+        var params = {
+          airtableUrl: airtableUrl,
+          systemInstruction: systemInstruction,
+          layout: layout,
+          descriptionFieldsData: descriptionFieldsData
+        };
+
+        if (layout === "single") {
+          params.slidesSingle = {
+            templateUrl: templateDeckUrl,
+            finalUrl: finalDeckUrl
+          };
+        } else if (layout === "double") {
+          params.slidesDouble = {
+            templateUrl: templateDeckUrl,
+            finalUrl: finalDeckUrl
+          };
+        }
+
+        google.script.run
+          .withSuccessHandler(function(response) {
+            // Hide the loading spinner.
+            document.getElementById("loadingSpinner").style.display = "none";
+            alert("Success: " + JSON.stringify(response));
+          })
+          .withFailureHandler(function(error) {
+            // Hide the loading spinner.
+            document.getElementById("loadingSpinner").style.display = "none";
+            alert("Error: " + error);
+          })
+          .processData(params);
+      }
+
+      // Global variable to track which prompt field is being edited
+      let currentPromptField = 1;
+
+      // Template definitions
+      const promptTemplates = {
+        refineDescription: "Refine this company description to be more concise and engaging. Focus on the unique value proposition and highlight the key benefits. Make it suitable for a presentation slide.",
+
+        highlightBenefits: "Extract and highlight the key benefits of this product/service. Format the output as 3-5 bullet points that emphasize the most compelling advantages for potential customers.",
+
+        technicalDetails: "Simplify the technical details of this product/service to make them understandable to a non-technical audience while preserving the important capabilities and specifications.",
+
+        marketPosition: "Analyze this company's market position and competitive advantage. Highlight what makes them unique in their industry and how they differentiate from competitors.",
+
+        valueProposition: "Create a clear and compelling value proposition statement that explains why customers should choose this company's products or services over alternatives.",
+
+        companyOverview: "Create a concise company overview that captures their mission, products/services, and target market in a way that's engaging for a presentation audience."
+      };
+
+      // Open the prompt modal
+      function openPromptModal(fieldNumber) {
+        currentPromptField = fieldNumber;
+
+        // Get current prompt value if it exists
+        const currentPrompt = document.getElementById('aiPrompt' + fieldNumber).value;
+        document.getElementById('templateEditor').value = currentPrompt;
+
+        // Show the modal
+        document.getElementById('promptModal').style.display = 'block';
+      }
+
+      // Close the prompt modal
+      function closePromptModal() {
+        document.getElementById('promptModal').style.display = 'none';
+      }
+
+      // Load a template into the editor
+      function loadTemplate(templateKey) {
+        const templateText = promptTemplates[templateKey];
+        document.getElementById('templateEditor').value = templateText;
+      }
+
+      // Apply the edited prompt back to the form
+      function applyPrompt() {
+        const editedPrompt = document.getElementById('templateEditor').value;
+
+        // Update the hidden textarea
+        document.getElementById('aiPrompt' + currentPromptField).value = editedPrompt;
+
+        // Update the display area (show first 100 chars with ellipsis if longer)
+        const displayText = editedPrompt.length > 100
+          ? editedPrompt.substring(0, 100) + '...'
+          : editedPrompt;
+
+        document.getElementById('promptDisplay' + currentPromptField).textContent =
+          editedPrompt ? displayText : 'Click below to create prompt';
+
+        // Close the modal
+        closePromptModal();
+      }
+
+      // Close modal if user clicks outside of it
+      window.onclick = function(event) {
+        const modal = document.getElementById('promptModal');
+        if (event.target == modal) {
+          closePromptModal();
+        }
+      }
+
+      // Enhanced error handling functions
+
+      /**
+       * Displays an error message in the UI with detailed information
+       * @param {Object} error - The error object with details
+       */
+      function displayError(error) {
+        // Hide the loading spinner
+        document.getElementById("loadingSpinner").style.display = "none";
+
+        // Get error container
+        let errorContainer = document.getElementById("errorContainer");
+
+        // Build error message HTML
+        let errorHTML = `
+          <div class="error-header">
+            <i class="fas fa-exclamation-circle"></i>
+            <h3>${error.errorCategory || "Error"}</h3>
+            <button onclick="dismissError()" class="dismiss-error">×</button>
+          </div>
+          <div class="error-body">
+            <p class="error-message">${error.errorMessage || error.message || "An unexpected error occurred."}</p>
+            ${error.suggestions ? `<p class="error-suggestion">${error.suggestions}</p>` : ''}
+            ${error.details ? `<button onclick="toggleErrorDetails()" class="toggle-details">Show technical details</button>
+            <div id="errorDetails" class="error-details" style="display: none;">
+              <pre>${JSON.stringify(error.details, null, 2)}</pre>
+            </div>` : ''}
+          </div>
+        `;
+
+        errorContainer.innerHTML = errorHTML;
+        errorContainer.style.display = "block";
+
+        // Scroll to error container
+        errorContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      /**
+       * Dismisses the error message
+       */
+      function dismissError() {
+        document.getElementById("errorContainer").style.display = "none";
+      }
+
+      /**
+       * Toggles the visibility of error details
+       */
+      function toggleErrorDetails() {
+        const details = document.getElementById("errorDetails");
+        const button = document.querySelector(".toggle-details");
+
+        if (details.style.display === "none") {
+          details.style.display = "block";
+          button.textContent = "Hide technical details";
+        } else {
+          details.style.display = "none";
+          button.textContent = "Show technical details";
+        }
+      }
+
+      /**
+       * Validates the form before submission
+       * @returns {Object} Validation result with valid flag and errors array
+       */
+      function validateForm() {
+        const errors = [];
+
+        // Check required fields
+        const airtableUrl = document.getElementById('airtableUrl').value;
+        if (!airtableUrl) {
+          errors.push("Airtable URL is required");
+        } else if (!airtableUrl.includes('airtable.com')) {
+          errors.push("Invalid Airtable URL format");
+        }
+
+        const templateDeckUrl = document.getElementById('templateDeckUrl').value;
+        if (!templateDeckUrl) {
+          errors.push("Please select a template");
+        }
+
+        const finalDeckUrl = document.getElementById('finalDeckUrl').value;
+        if (!finalDeckUrl) {
+          errors.push("Final Deck URL is required");
+        } else if (!finalDeckUrl.includes('docs.google.com/presentation')) {
+          errors.push("Invalid Google Slides URL format for Final Deck");
+        }
+
+        // Check description fields
+        const container = document.getElementById('descriptionFieldsContainer');
+        const fieldGroups = container.getElementsByClassName('description-field-group');
+
+        for (let i = 0; i < fieldGroups.length; i++) {
+          const index = i + 1;
+          const fieldName = document.getElementById('descriptionField' + index).value;
+          const prompt = document.getElementById('aiPrompt' + index).value;
+
+          if ((fieldName && !prompt) || (!fieldName && prompt)) {
+            errors.push(`Both field name and AI prompt must be provided for field #${index}`);
+          }
+        }
+
+        // If there are errors, display them
+        if (errors.length > 0) {
+          const errorObj = {
+            errorCategory: "Validation Error",
+            errorMessage: "Please fix the following issues:",
+            details: errors.map(err => `• ${err}`).join('\n')
+          };
+
+          displayError(errorObj);
+          return { valid: false, errors };
+        }
+
+        return { valid: true };
+      }
+
+      // Override the submitForm function to include validation
+      const originalSubmitForm = submitForm;
+      submitForm = function() {
+        // Clear any existing errors
+        dismissError();
+
+        // Validate the form
+        const validation = validateForm();
+        if (!validation.valid) {
+          return; // Stop if validation fails
+        }
+
+        // Show the loading spinner
+        document.getElementById("loadingSpinner").style.display = "block";
+
+        // Collect form data (same as original function)
+        var airtableUrl = document.getElementById('airtableUrl').value;
+        var systemInstruction = document.getElementById('systemInstruction').value;
+        var layout = document.getElementById('layout').value;
+        var templateDeckUrl = document.getElementById('templateDeckUrl').value;
+        var finalDeckUrl = document.getElementById('finalDeckUrl').value;
+
+        // Collect description fields and prompts
+        var descriptionFieldsData = [];
+        var container = document.getElementById('descriptionFieldsContainer');
+        var fieldGroups = container.getElementsByClassName('description-field-group');
+
+        for (var i = 0; i < fieldGroups.length; i++) {
+          var index = i + 1;
+          var fieldName = document.getElementById('descriptionField' + index).value;
+          var prompt = document.getElementById('aiPrompt' + index).value;
+
+          if (fieldName && prompt) {
+            descriptionFieldsData.push({
+              fieldName: fieldName,
+              prompt: prompt
+            });
+          }
+        }
+
+        var params = {
+          airtableUrl: airtableUrl,
+          systemInstruction: systemInstruction,
+          layout: layout,
+          descriptionFieldsData: descriptionFieldsData
+        };
+
+        if (layout === "single") {
+          params.slidesSingle = {
+            templateUrl: templateDeckUrl,
+            finalUrl: finalDeckUrl
+          };
+        } else if (layout === "double") {
+          params.slidesDouble = {
+            templateUrl: templateDeckUrl,
+            finalUrl: finalDeckUrl
+          };
+        }
+
+        // Call the server with enhanced error handling
+        google.script.run
+          .withSuccessHandler(function(response) {
+            // Hide the loading spinner
+            document.getElementById("loadingSpinner").style.display = "none";
+
+            // Check if the response contains an error
+            if (response.result === "Error") {
+              displayError(response);
+            } else {
+              alert("Success: " + JSON.stringify(response));
+            }
+          })
+          .withFailureHandler(function(error) {
+            // Hide the loading spinner
+            document.getElementById("loadingSpinner").style.display = "none";
+
+            // Display the error
+            if (typeof error === 'object') {
+              displayError(error);
+            } else {
+              displayError({
+                errorCategory: "System Error",
+                errorMessage: error.toString()
+              });
+            }
+          })
+          .processData(params);
+      };
+    </script>
+  </body>
+</html>
