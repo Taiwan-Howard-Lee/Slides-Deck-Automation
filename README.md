@@ -206,6 +206,20 @@ For issues and questions:
 
 This project implements a truly universal approach to data-to-slides transformation, moving beyond hardcoded assumptions to create a flexible, AI-powered system that can handle any data type and template structure.
 
+## Legacy Features
+
+This project also maintains backward compatibility with the original Airtable-specific automation features:
+
+### Airtable Integration
+- Retrieves data from Airtable bases using dynamic parameters
+- Supports both single-company and double-company slide layouts
+- Includes content refinement using AI API (Gemini-2.0 Flash)
+
+### Dynamic Configuration
+- HTML form interface for user inputs
+- Automatic extraction of base IDs and table IDs from URLs
+- POST method with JSON for backend processing
+
 ## Script ID
 
 The script ID for this project is: `1fHT-8rM7QCB-WngePreK4F5OzKpJYYy5132bSrl4AKg5yzYjucLTNCF-`

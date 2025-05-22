@@ -1,0 +1,18 @@
+{
+  "timeZone": "Australia/Melbourne",
+  "dependencies": {},
+  "webapp": {
+    "executeAs": "USER_ACCESSING",
+    "access": "DOMAIN"
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "sheets": {
+    "macros": [
+      {
+        "menuName": "generateSlidesFromSheet",
+        "functionName": "generateSlidesFromSheet"
+      }
+    ]
+  }
+}
