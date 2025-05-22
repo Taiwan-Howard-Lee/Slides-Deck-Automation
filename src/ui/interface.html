@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base target="_top">
+    <!-- Google Fonts: Teko for headings -->
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 
+         For Proxima Nova, we assume it is available via your company's hosted CSS or system installation.
+         In this demo, we simply call it "Proxima Nova".
+    -->
+    <!-- Font Awesome Script -->
+    <script src="https://kit.fontawesome.com/ec27db2507.js" crossorigin="anonymous"></script>
+    <style>
+      /* CSS Variables */
+      :root {
+        --teal-color: #39908b; /* Primary teal color */
+        --white: #ffffff;       /* White color */
+      }
+      
+      /* Reset & Global Styles */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      
+      /* Global font and background */
+      body {
+        font-family: 'Proxima Nova', sans-serif;
+        background-color: #f5f7fa;
+        padding: 20px;
+        color: var(--teal-color);
+        line-height: 1.6;
+      }
+      
+      /* Container styling */
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: var(--white);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        animation: fadeIn 1s ease-out;
+      }
+      
+      /* Headings: Use Teko font */
+      h1, h2 {
+        font-family: 'Teko', sans-serif;
+        text-align: center;
+        margin-bottom: 20px;
+        color: var(--teal-color);
+      }
+      h1 i {
+        margin-right: 10px;
+      }
+      
+      /* Introductory text */
+      p.intro {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.2em;
+      }
+      
+      /* Company logo styling */
+      .company-logo {
+        display: block;
+        max-width: 150px;
+        margin: 0 auto 20px auto;
+      }
+      
+      /* Template gallery button */
+      .template-gallery {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .template-gallery a {
+        display: inline-block;
+        padding: 12px 24px;
+        font-size: 1.2em;
+        font-weight: 600;
+        color: var(--teal-color);
+        background: var(--white);
+        border: 2px solid var(--teal-color);
+        border-radius: 6px;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      .template-gallery a:hover {
+        background-color: var(--teal-color);
+        color: var(--white);
+      }
+      
+      /* Form styling */
+      form {
+        margin: 20px 0;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 1.1em;
+        color: var(--teal-color);
+      }
+      input[type="text"],
+      select,
+      textarea {
+        width: 100%;
+        padding: 15px;
+        font-size: 1.1em;
+        font-family: 'Proxima Nova', sans-serif;
+        margin-bottom: 15px;
+        background: var(--white);
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        color: var(--teal-color);
+      }
+      input[type="text"]::placeholder,
+      textarea::placeholder {
+        color: #999;
+      }
+      input[type="text"]:focus,
+      select:focus,
+      textarea:focus {
+        border-color: var(--teal-color);
+        box-shadow: 0 0 8px rgba(57,144,139,0.3);
+        outline: none;
+      }
+      
+      /* Submit button styling */
+      button.submit-btn {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        font-size: 1.2em;
+        font-family: 'Proxima Nova', sans-serif;
+        background-color: var(--white);
+        color: var(--teal-color);
+        border: 2px solid var(--teal-color);
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+      }
+      button.submit-btn i {
+        margin-right: 8px;
+      }
+      button.submit-btn:hover {
+        background-color: var(--teal-color);
+        color: var(--white);
+        transform: scale(1.02);
+      }
+      
+      /* Loading spinner styling */
+      .loading-spinner {
+        display: none;
+        text-align: center;
+        margin: 20px 0;
+      }
+      .spinner {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid var(--teal-color);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 2s linear infinite;
+        margin: 0 auto;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      /* Responsive adjustments */
+      @media (max-width: 600px) {
+        .container {
+          padding: 20px;
+        }
+        input[type="text"],
+        select,
+        textarea,
+        button.submit-btn {
+          padding: 12px;
+          font-size: 1em;
+        }
+        .template-gallery a {
+          padding: 10px 16px;
+          font-size: 1em;
+        }
+      }
+
+      .template-gallery-subtle {
+        display: block;
+        text-align: right;
+        margin-top: 8px;  /* spacing above the link */
+        margin-bottom: 4px; /* spacing below the link */
+        font-size: 0.85em;
+      }
+
+      .template-gallery-subtle a {
+        color: var(--teal-color) !important;
+        text-decoration: underline;
+      }
+      
+      /* Fade-in animation */
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Optional Company Logo -->
+      <img src="https://cdn.prod.website-files.com/63f3e085b054e9e3120238f1/63f3e0ba605c2a218c60f27e_image%201.svg" alt="Company Logo" class="company-logo">
+      
+      <!-- Header with wand-magic icon -->
+      <h1><i class="fa-solid fa-wand-magic"></i>Slide Deck Automation 2.0</h1>
+
+      <p class="intro">Welcome! Please select your template to get started.</p>
+      
+      <!-- Template Selection Dropdown -->
+      <div id="templateSection">
+        <label for="templateDropdown">Select Template File:</label>
+        <select id="templateDropdown" name="templateDropdown" onchange="onTemplateChange()">
+          <option value="">-- Loading Templates... --</option>
+        </select>
+      </div>
+
+      <!-- Smaller, less prominent link below dropdown -->
+      <div class="template-gallery-subtle">
+        <a id="galleryLink" href="https://drive.google.com/drive/u/0/folders/1eCjnDNHYDqskWYqPhJdlMTXiqio4TJkr" target="_blank">
+          View full template gallery
+        </a>
+      </div>
+
+      
+      <!-- Hidden field for detected layout -->
+      <input type="hidden" id="layout" name="layout" value="" />
+      
+      <!-- Universal Fields: Airtable URL and Program Details -->
+      <div id="universalFields">
+        <label for="airtableUrl">Airtable URL:</label>
+        <input type="text" id="airtableUrl" name="airtableUrl" placeholder="'Ready for preso' must be inside as a clickbox field!!!" required />
+        
+        <label for="systemInstruction">Program-specific Details:</label>
+        <textarea id="systemInstruction" name="systemInstruction" rows="4" placeholder='Enter the program details, for example, "Pepsi is looking for a healthy new soda..."' required></textarea>
+      </div>
+      
+      <!-- Layout-Specific Field: Final Deck URL -->
+      <div id="finalDeckField">
+        <label for="finalDeckUrl">Final Deck URL:</label>
+        <input type="text" id="finalDeckUrl" name="finalDeckUrl" placeholder="This slide deck must provide edit access for anyone with the link!!!" required />
+      </div>
+      
+      <!-- Hidden field: Template Deck URL (populated automatically) -->
+      <input type="hidden" id="templateDeckUrl" name="templateDeckUrl" value="" />
+      
+      <!-- Submit Button -->
+      <button type="button" class="submit-btn" onclick="submitForm()">
+        <i class="fas fa-paper-plane"></i> Submit
+      </button>
+      
+      <!-- Loading Spinner -->
+      <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner"></div>
+        <p>Working on it...</p>
+      </div>
+    </div>
+    
+    <script>
+      // This function extracts the folder ID from the gallery link URL.
+      function getFolderIdFromGallery() {
+        var galleryLink = document.getElementById('galleryLink').getAttribute('href');
+        // Match the folder ID between "/folders/" and the next "/" or end of string.
+        var match = galleryLink.match(/\/folders\/([^\/]+)/);
+        return match ? match[1] : "";
+      }
+      
+      // Load template files from the specified Drive folder on page load.
+      function loadTemplateFiles() {
+        var folderId = getFolderIdFromGallery();
+        console.log("Extracted folder ID:", folderId);
+        
+        google.script.run
+          .withSuccessHandler(function(files) {
+            var dropdown = document.getElementById('templateDropdown');
+            dropdown.innerHTML = "<option value=''>-- Select Template --</option>";
+            files.forEach(function(file) {
+              var option = document.createElement("option");
+              option.value = file.url;
+              option.text = file.name;
+              dropdown.appendChild(option);
+            });
+            console.log("Loaded files:", files);
+          })
+          .withFailureHandler(function(error) {
+            console.error("Error loading templates:", error);
+          })
+          .getTemplateFilesFromFolder(folderId);
+      }
+      
+      // Call loadTemplateFiles() when the window loads.
+      window.onload = function() {
+        loadTemplateFiles();
+      }
+      
+      // When a template file is selected, detect the layout from its name and populate hidden fields.
+      function onTemplateChange() {
+        var dropdown = document.getElementById('templateDropdown');
+        var selectedUrl = dropdown.value;
+        var selectedName = dropdown.options[dropdown.selectedIndex].text;
+        var layout = "";
+        // Detect 'single' or 'double' in the file name.
+        if (selectedName.toLowerCase().includes("single")) {
+          layout = "single";
+        } else if (selectedName.toLowerCase().includes("double")) {
+          layout = "double";
+        }
+        document.getElementById("layout").value = layout;
+        document.getElementById("templateDeckUrl").value = selectedUrl;
+      }
+      
+      // When the form is submitted, gather all data and send it to the server.
+      function submitForm() {
+        // Show the loading spinner.
+        document.getElementById("loadingSpinner").style.display = "block";
+        
+        var airtableUrl = document.getElementById('airtableUrl').value;
+        var systemInstruction = document.getElementById('systemInstruction').value;
+        var layout = document.getElementById('layout').value;
+        var templateDeckUrl = document.getElementById('templateDeckUrl').value;
+        var finalDeckUrl = document.getElementById('finalDeckUrl').value;
+        
+        var params = {
+          airtableUrl: airtableUrl,
+          systemInstruction: systemInstruction,
+          layout: layout
+        };
+        
+        if (layout === "single") {
+          params.slidesSingle = {
+            templateUrl: templateDeckUrl,
+            finalUrl: finalDeckUrl
+          };
+        } else if (layout === "double") {
+          params.slidesDouble = {
+            templateUrl: templateDeckUrl,
+            finalUrl: finalDeckUrl
+          };
+        }
+        
+        google.script.run
+          .withSuccessHandler(function(response) {
+            // Hide the loading spinner.
+            document.getElementById("loadingSpinner").style.display = "none";
+            alert("Success: " + JSON.stringify(response));
+          })
+          .withFailureHandler(function(error) {
+            // Hide the loading spinner.
+            document.getElementById("loadingSpinner").style.display = "none";
+            alert("Error: " + error);
+          })
+          .processData(params);
+      }
+    </script>
+  </body>
+</html>
